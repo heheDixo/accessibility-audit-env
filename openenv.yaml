@@ -1,0 +1,9 @@
+spec_version: 1
+name: accessibility_audit_env
+type: environment
+description: "Web accessibility auditing environment where agents fix WCAG violations in HTML pages, graded by axe-core"
+runtime:
+  type: docker
+  dockerfile: server/Dockerfile
+app:
+  port: 7860

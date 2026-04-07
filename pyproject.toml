@@ -1,0 +1,22 @@
+[project]
+name = "accessibility_audit_env"
+version = "0.1.0"
+description = "Web accessibility auditing OpenEnv environment graded by axe-core"
+requires-python = ">=3.10"
+dependencies = [
+  "openenv-core>=0.2.1",
+  "fastapi",
+  "uvicorn",
+  "playwright",
+  "axe-playwright-python",
+]
+
+[project.scripts]
+server = "accessibility_audit_env.server.app:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["accessibility_audit_env*"]

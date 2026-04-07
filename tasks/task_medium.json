@@ -1,0 +1,13 @@
+{
+  "task_id": "medium",
+  "name": "Analytics dashboard accessibility fix",
+  "description": "Fix WCAG 2.1 violations in an analytics dashboard.",
+  "max_steps": 5,
+  "expected_violations": [
+    "heading-order",
+    "link-name",
+    "color-contrast",
+    "landmark-one-main",
+    "fieldset"
+  ]
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!-- VIOLATION: missing lang -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Northwind Checkout</title>
+<style>
+  body { font-family: Inter, Arial, sans-serif; margin: 0; background: #fafafa; color: #222; }
+  header { background: #0b3a66; color: #d8e2ec; padding: 14px 24px; }
+  header h1 { margin: 0; font-size: 20px; }
+  main { max-width: 880px; margin: 24px auto; padding: 24px; background: #fff; border: 1px solid #e5e7eb; }
+  h2 { margin-top: 28px; }
+  fieldset { border: 1px solid #d0d4dc; padding: 12px 16px; margin-bottom: 16px; }
+  legend { padding: 0 6px; font-weight: 600; }
+  .row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .field { display: flex; flex-direction: column; }
+  .field label { font-size: 13px; margin-bottom: 4px; }
+  .field input, .field select { padding: 8px; border: 1px solid #c0c4cc; border-radius: 4px; }
+  .summary { background: #f3f4f6; padding: 12px; border-radius: 6px; }
+  /* VIOLATION: link color fails 4.5:1 contrast on white */
+  a.help { color: #9ab8d6; }
+  /* VIOLATION: placeholder text below contrast minimum */
+  .field input::placeholder { color: #cccccc; }
+  .cta { background: #0b3a66; color: #fff; border: 0; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Northwind Checkout</h1>
+  <!-- VIOLATION: link-name (icon-only anchor with no accessible name) -->
+  <a href="/cart"><span aria-hidden="true">&#128722;</span></a>
+</header>
+
+<main>
+  <h2>Shipping</h2>
+
+  <div class="row">
+    <div class="field">
+      <label for="email">Email</label>
+      <!-- VIOLATION: input has type="text" for an email field, missing autocomplete -->
+      <input id="email" name="email" type="text" placeholder="you@example.com">
+    </div>
+    <div class="field">
+      <label for="phone">Phone</label>
+      <!-- VIOLATION: missing autocomplete=tel -->
+      <input id="phone" name="phone" type="tel">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="field">
+      <label for="addr1">Street address</label>
+      <!-- VIOLATION: missing autocomplete=street-address -->
+      <input id="addr1" name="addr1" type="text">
+    </div>
+    <div class="field">
+      <label for="addr2">Apt / Suite</label>
+      <input id="addr2" name="addr2" type="text">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="field">
+      <!-- VIOLATION: <select> with no <label> association -->
+      <select name="country">
+        <option>United States</option>
+        <option>Canada</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="zip">ZIP</label>
+      <!-- VIOLATION: missing autocomplete=postal-code -->
+      <input id="zip" name="zip" type="text">
+    </div>
+  </div>
+
+  <h2>Payment method</h2>
+
+  <!-- VIOLATION: radio group without <fieldset>/<legend> -->
+  <p>
+    <input type="radio" id="pay-card" name="pay" value="card" checked>
+    <label for="pay-card">Credit card</label>
+    <input type="radio" id="pay-paypal" name="pay" value="paypal">
+    <label for="pay-paypal">PayPal</label>
+    <input type="radio" id="pay-apple" name="pay" value="apple">
+    <label for="pay-apple">Apple Pay</label>
+  </p>
+
+  <div class="row">
+    <div class="field">
+      <label for="cc">Card number</label>
+      <!-- VIOLATION: missing autocomplete=cc-number -->
+      <input id="cc" name="cc" type="text">
+    </div>
+    <div class="field">
+      <label for="cc-exp">Expiry</label>
+      <!-- VIOLATION: missing autocomplete=cc-exp -->
+      <input id="cc-exp" name="cc-exp" type="text" placeholder="MM/YY">
+    </div>
+  </div>
+
+  <h2>Order summary</h2>
+
+  <!-- VIOLATION: data table without <th> -->
+  <table class="summary">
+    <tr><td>Item</td><td>Qty</td><td>Price</td></tr>
+    <tr><td>Wireless mouse</td><td>1</td><td>$29.00</td></tr>
+    <tr><td>Mechanical keyboard</td><td>1</td><td>$129.00</td></tr>
+  </table>
+
+  <p>
+    <!-- VIOLATION: low-contrast help link -->
+    <a href="/help" class="help">Need help?</a>
+  </p>
+
+  <!-- VIOLATION: label-content-name-mismatch (visible "Place order", aria-label "Cancel order") -->
+  <button class="cta" aria-label="Cancel order">Place order</button>
+
+  <!-- VIOLATION: aria-hidden on container with focusable button -->
+  <div aria-hidden="true">
+    <button>Saved address book</button>
+  </div>
+
+  <!-- VIOLATION: duplicate id (referenced twice) -->
+  <span id="dup-note">note</span>
+  <span id="dup-note">note</span>
+
+  <!-- VIOLATION: input role=spinbutton with no accessible name and no aria-valuenow -->
+  <div role="spinbutton" tabindex="0"></div>
+</main>
+
+<!-- VIOLATION: missing <main>/contentinfo distinction is OK, but no skip link, no landmark for nav above -->
+
+</body>
+</html>

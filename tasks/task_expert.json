@@ -1,0 +1,19 @@
+{
+  "task_id": "expert",
+  "name": "E-commerce checkout accessibility fix",
+  "description": "Fix subtle WCAG 2.1 violations in a multi-step checkout flow.",
+  "max_steps": 5,
+  "expected_violations": [
+    "html-has-lang",
+    "link-name",
+    "label",
+    "select-name",
+    "autocomplete-valid",
+    "color-contrast",
+    "duplicate-id",
+    "aria-hidden-focus",
+    "label-content-name-mismatch",
+    "aria-input-field-name",
+    "th-has-data-cells"
+  ]
+}

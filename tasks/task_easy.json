@@ -1,0 +1,7 @@
+{
+  "task_id": "easy",
+  "name": "Landing page accessibility fix",
+  "description": "Fix the WCAG 2.1 violations in a small marketing landing page.",
+  "max_steps": 5,
+  "expected_violations": ["image-alt", "label"]
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Acme Cloud — Simple Hosting</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; color: #222; background: #fff; }
+  header { background: #0b3d91; color: #fff; padding: 20px 40px; }
+  header h1 { margin: 0; font-size: 24px; }
+  nav a { color: #fff; margin-right: 16px; text-decoration: none; }
+  .hero { padding: 60px 40px; text-align: center; background: #f4f6fb; }
+  .hero h2 { font-size: 32px; margin-bottom: 12px; color: #0b3d91; }
+  .hero p { font-size: 18px; color: #333; max-width: 600px; margin: 0 auto 24px; }
+  .features { display: flex; gap: 24px; padding: 40px; justify-content: center; }
+  .feature { max-width: 260px; padding: 20px; border: 1px solid #ddd; border-radius: 6px; }
+  .feature h3 { color: #0b3d91; }
+  .signup { padding: 40px; background: #fff; text-align: center; }
+  .signup input { padding: 10px; font-size: 16px; width: 260px; border: 1px solid #999; border-radius: 4px; }
+  .signup button { padding: 10px 20px; font-size: 16px; background: #0b3d91; color: #fff; border: 0; border-radius: 4px; cursor: pointer; }
+  footer { background: #222; color: #ccc; padding: 20px 40px; text-align: center; font-size: 14px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Acme Cloud</h1>
+  <nav aria-label="Main navigation">
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/docs">Documentation</a>
+    <a href="/contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <!-- VIOLATION 1: <img> missing alt attribute -->
+    <img src="/assets/hero-cloud.png" width="120" height="120">
+    <h2>Deploy in seconds. Scale in minutes.</h2>
+    <p>Acme Cloud gives developers a simple, predictable platform for hosting modern apps without the operations overhead.</p>
+    <a href="/signup" style="display:inline-block;padding:12px 24px;background:#0b3d91;color:#fff;text-decoration:none;border-radius:4px;">Start your free trial</a>
+  </section>
+
+  <section class="features" aria-label="Product features">
+    <article class="feature">
+      <h3>Global edge network</h3>
+      <p>Serve your users from 30+ regions with automatic failover and zero configuration.</p>
+    </article>
+    <article class="feature">
+      <h3>Predictable pricing</h3>
+      <p>Flat monthly plans. No surprise bandwidth bills. Cancel any time.</p>
+    </article>
+    <article class="feature">
+      <h3>Built-in observability</h3>
+      <p>Logs, metrics, and traces included on every plan. No third-party agents needed.</p>
+    </article>
+  </section>
+
+  <section class="signup" aria-label="Newsletter signup">
+    <h2>Get product updates</h2>
+    <form action="/subscribe" method="post">
+      <!-- VIOLATION 2: <input> without an associated <label> -->
+      <input type="email" name="email" placeholder="you@example.com">
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2026 Acme Cloud, Inc. All rights reserved.</p>
+</footer>
+</body>
+</html>

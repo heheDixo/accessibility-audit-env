@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Insight Analytics Dashboard</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; margin: 0; background: #f7f8fa; color: #1a1a1a; }
+  .topbar { background: #ffffff; border-bottom: 1px solid #e2e5ea; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .topbar h1 { margin: 0; font-size: 20px; }
+  .layout { display: flex; min-height: calc(100vh - 56px); }
+  aside { width: 220px; background: #ffffff; border-right: 1px solid #e2e5ea; padding: 20px 16px; }
+  aside ul { list-style: none; padding: 0; margin: 0; }
+  aside li { margin-bottom: 10px; }
+  aside a { color: #0b3d91; text-decoration: none; }
+  .content { flex: 1; padding: 24px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .card { background: #fff; border: 1px solid #e2e5ea; border-radius: 8px; padding: 16px; }
+  .card h3 { margin: 0 0 8px; font-size: 14px; color: #666; text-transform: uppercase; }
+  .card .num { font-size: 28px; font-weight: 700; color: #1a1a1a; }
+  .panel { background: #fff; border: 1px solid #e2e5ea; border-radius: 8px; padding: 20px; margin-bottom: 24px; }
+  /* VIOLATION: low-contrast CTA button (color #999 on background #eee) */
+  .cta { color: #999; background: #eee; border: 0; padding: 12px 22px; border-radius: 6px; font-size: 16px; cursor: pointer; }
+  .filters label { display: inline-block; margin-right: 16px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  th, td { text-align: left; padding: 10px; border-bottom: 1px solid #e2e5ea; }
+  th { background: #f0f2f6; }
+  footer { padding: 20px 24px; text-align: center; color: #666; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<!-- VIOLATION: missing <main> landmark region (content is in a plain div) -->
+
+<div class="topbar">
+  <h1>Insight Analytics</h1>
+  <nav aria-label="User menu">
+    <a href="/profile">Profile</a> |
+    <a href="/logout">Logout</a>
+  </nav>
+</div>
+
+<div class="layout">
+  <aside aria-label="Section navigation">
+    <ul>
+      <li><a href="/dashboard">Overview</a></li>
+      <li><a href="/reports">Reports</a></li>
+      <li><a href="/segments">Segments</a></li>
+      <li><a href="/alerts">Alerts</a></li>
+      <li><a href="/settings">Settings</a></li>
+    </ul>
+  </aside>
+
+  <div class="content">
+    <!-- VIOLATION: heading hierarchy skip — h1 in topbar, then jumps to h3 (no h2) -->
+    <h3>Welcome back, Priya</h3>
+    <p>Here is a snapshot of your account performance for the last 7 days.</p>
+
+    <div class="cards">
+      <div class="card"><h3>Sessions</h3><div class="num">128,402</div></div>
+      <div class="card"><h3>Conversions</h3><div class="num">3,914</div></div>
+      <div class="card"><h3>Revenue</h3><div class="num">$48,210</div></div>
+    </div>
+
+    <div class="panel">
+      <h3>Top campaigns</h3>
+      <table>
+        <thead>
+          <tr><th>Campaign</th><th>Clicks</th><th>CTR</th><th>Spend</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Spring Sale</td><td>12,402</td><td>4.1%</td><td>$1,840</td></tr>
+          <tr><td>Brand Awareness</td><td>9,118</td><td>2.7%</td><td>$2,200</td></tr>
+          <tr><td>Retargeting</td><td>6,540</td><td>5.8%</td><td>$980</td></tr>
+        </tbody>
+      </table>
+      <p>
+        <!-- VIOLATION: 3 non-descriptive link texts -->
+        <a href="/campaigns/spring">Click here</a> &nbsp;
+        <a href="/campaigns/brand">Read more</a> &nbsp;
+        <a href="/campaigns/retarget">Learn more</a>
+      </p>
+    </div>
+
+    <div class="panel">
+      <h3>Filter results</h3>
+      <form action="/filter" method="get" class="filters">
+        <!-- VIOLATION: radio button group without <fieldset> + <legend> -->
+        <label><input type="radio" name="range" value="7d" checked> Last 7 days</label>
+        <label><input type="radio" name="range" value="30d"> Last 30 days</label>
+        <label><input type="radio" name="range" value="90d"> Last 90 days</label>
+        <br><br>
+        <button class="cta" type="submit">Apply filters</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Insight Analytics</p>
+</footer>
+</body>
+</html>

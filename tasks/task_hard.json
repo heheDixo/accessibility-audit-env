@@ -1,0 +1,18 @@
+{
+  "task_id": "hard",
+  "name": "CRM web app accessibility fix",
+  "description": "Fix 10+ WCAG 2.1 violations in a multi-component CRM web app.",
+  "max_steps": 5,
+  "expected_violations": [
+    "html-has-lang",
+    "image-alt",
+    "button-name",
+    "label",
+    "select-name",
+    "autocomplete-valid",
+    "aria-dialog-name",
+    "aria-hidden-focus",
+    "color-contrast",
+    "skip-link"
+  ]
+}
