@@ -19,6 +19,17 @@ app = _factory(
 )
 
 
+@app.get("/")
+def root():
+    return {
+        "name": "accessibility_audit_env",
+        "status": "ok",
+        "description": "OpenEnv environment: fix WCAG violations in HTML, graded by axe-core.",
+        "endpoints": ["/health", "/reset", "/step"],
+        "tasks": ["easy", "medium", "hard", "expert"],
+    }
+
+
 def main() -> None:
     """Entry point for `accessibility-audit-server` console script."""
     import os
