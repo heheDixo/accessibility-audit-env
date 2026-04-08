@@ -73,14 +73,14 @@ def log_step(step: int, action: str, reward: float, done: bool, error: Optional[
     if len(action) > 100:
         action_short += "..."
     print(
-        f"[STEP] step={step} action={action_short} reward={reward:.2f} "
+        f"[STEP] step={step} action={action_short} reward={reward:.4f} "
         f"done={done_val} error={error_val}",
         flush=True,
     )
 
 
 def log_end(success: bool, steps: int, rewards: List[float]) -> None:
-    rewards_str = ",".join(f"{r:.2f}" for r in rewards)
+    rewards_str = ",".join(f"{r:.4f}" for r in rewards)
     print(
         f"[END] success={str(success).lower()} steps={steps} rewards={rewards_str}",
         flush=True,
@@ -158,12 +158,18 @@ async def run_task(client: OpenAI, env, task_id: str) -> float:
                 result = await env.step(AccessibilityAuditAction(fixed_html=fixed_html))
             except Exception as step_exc:
                 steps_taken = step
-                rewards.append(0.0)
-                log_step(step, action_str, 0.0, True, str(step_exc))
+                rewards.append(1e-3)
+                log_step(step, action_str, 1e-3, True, str(step_exc))
                 raise
 
             obs = _obs(result)
-            reward = float(getattr(result, "reward", None) or getattr(obs, "reward", 0.0) or 0.0)
+            reward = float(getattr(result, "reward", None) or getattr(obs, "reward", 1e-3) or 1e-3)
+            # Hard guarantee: every reward we report stays strictly inside (0, 1).
+            EPS = 1e-3
+            if reward <= 0.0:
+                reward = EPS
+            elif reward >= 1.0:
+                reward = 1.0 - EPS
             done = bool(getattr(result, "done", False) or getattr(obs, "done", False))
 
             rewards.append(reward)
@@ -173,7 +179,9 @@ async def run_task(client: OpenAI, env, task_id: str) -> float:
             if done:
                 break
 
-        score = max(0.0, min(1.0, rewards[-1] if rewards else 0.0))
+        EPS = 1e-3
+        raw = rewards[-1] if rewards else EPS
+        score = max(EPS, min(1.0 - EPS, raw))
         success = score > 0.1
 
     except Exception as exc:
