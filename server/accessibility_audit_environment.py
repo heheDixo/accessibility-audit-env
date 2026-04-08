@@ -123,7 +123,7 @@ class AccessibilityAuditEnvironment(Environment):
             violation_count=len(violations),
             violation_summary=format_violations_summary(violations),
             done=False,
-            reward=0.0,
+            reward=1e-3,
         )
 
     # ------------------------------------------------------------------
