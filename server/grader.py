@@ -137,14 +137,17 @@ def compute_reward(
       bonus  = +0.20 if zero violations remain
       pen    = -0.15 per *newly introduced* rule_id (not in the original set)
 
-    Clamped to [0.0, 1.0]. If the original page had no violations, return 1.0
-    when the fixed page also has none, otherwise 0.0.
+    Clamped to the open interval (0.0, 1.0) using EPS so scores are strictly
+    between 0 and 1 (never exactly 0.0 or 1.0).
     """
+    EPS = 1e-3
+    LO, HI = EPS, 1.0 - EPS
+
     orig_w = weighted_score(original_violations)
     new_w = weighted_score(new_violations)
 
     if orig_w <= 0:
-        return 1.0 if new_w == 0 else 0.0
+        return HI if new_w == 0 else LO
 
     base = (orig_w - new_w) / orig_w
 
@@ -156,10 +159,10 @@ def compute_reward(
     introduced = new_rule_ids - original_rule_ids
     base -= 0.15 * len(introduced)
 
-    if base < 0.0:
-        return 0.0
-    if base > 1.0:
-        return 1.0
+    if base < LO:
+        return LO
+    if base > HI:
+        return HI
     return float(base)
 
 

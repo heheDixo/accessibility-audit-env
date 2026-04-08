@@ -148,7 +148,7 @@ class AccessibilityAuditEnvironment(Environment):
                 violation_count=0,
                 violation_summary=f"Error processing HTML: {exc}",
                 done=True,
-                reward=0.0,
+                reward=1e-3,
             )
 
         reward = compute_reward(
