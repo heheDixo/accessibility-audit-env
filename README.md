@@ -1,16 +1,3 @@
----
-title: Accessibility Audit Env
-emoji: ♿
-colorFrom: blue
-colorTo: green
-sdk: docker
-app_port: 7860
-pinned: false
-tags:
-  - openenv
-  - hackathon
----
-
 # AccessibilityAudit-Env
 
 An OpenEnv environment where an AI agent must fix **WCAG 2.1 accessibility
